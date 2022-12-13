@@ -31,7 +31,7 @@ with open("athletics.tsv", 'r') as file:
                     NOC = line_split[7]
                     year = line_split[9]
                     sport = line_split[12]
-                    medal = line_split[14]
+                    medal = (line_split[14])
                     line = file.readline()
                     if args.country == country or args.country == NOC:
                         if int(args.year) == int(year):
@@ -39,21 +39,19 @@ with open("athletics.tsv", 'r') as file:
                                 if counter <= 10:
                                     print(f"{counter}.{name} - {sport} - {medal}")
                                     counter += 1
-                                    print(medal)
-                                else:
-                                    break
-
-                                if str(medal) == "Bronze":
-                                    bronze += 1
-                                    print("ff")
-                                elif medal == "Silver":
-                                    silver += 1
-                                elif medal == "Gold":
-                                    gold += 1
-                                if counter == 10:
-                                    print("Gold="+ str(gold) +" Silver="+ str(silver) +" Bronze="+ str(bronze))
-
-
+                                    if medal == "Bronze\n":
+                                        bronze += 1
+                                    if medal == "Silver\n":
+                                        silver += 1
+                                    if medal == "Gold\n":
+                                        gold += 1
+                                    if counter == 11:
+                                        if bronze + silver + gold < 10:
+                                            print("This country doesn't have more than 10 medals")
+                                            break
+                                        else:
+                                            print("Gold - "+ str(gold) + " Silver - "+ str(silver) + " Bronze - "+ str(bronze))
+                                            break
                             else:
                                 continue
                         else:
