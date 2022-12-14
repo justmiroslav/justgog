@@ -11,6 +11,63 @@ parser.add_argument("--interactive", required=False)
 
 args = parser.parse_args()
 
+
+def gag(curently_year, country1):
+    counter = 0
+    with open("athletics.tsv", 'r') as file:
+        file.readline()
+        line = file.readline()
+        while line != "":
+            line_split = line.split("\t")
+            country = line_split[6]
+            year = line_split[9]
+            medal = (line_split[14])
+            line = file.readline()
+            if country1 == country:
+                if curently_year == year:
+                    if medal != "NA\n":
+                        counter += 1
+                    else:
+                        continue
+                else:
+                    continue
+            else:
+                continue
+        return counter
+
+
+def gog(type):
+    data = []
+    count = []
+    with open("athletics.tsv", 'r') as file:
+        file.readline()
+        line = file.readline()
+        while line != "":
+            line_split = line.split("\t")
+            country = line_split[6]
+            year = line_split[9]
+            medal = (line_split[14])
+            line = file.readline()
+            if type == country:
+                if medal != "NA\n":
+                    curently_year = year
+                    data.append(year)
+                    count.append(gag(curently_year, country))
+                else:
+                    continue
+            else:
+                continue
+        print(len(data))
+        n = 0
+        while True:
+            if max(count) != count[n]:
+                n += 1
+            else:
+                print(type, data[n], count[n])
+                break
+        return
+
+
 print(args)
 all_years = []
 all_countries = []
@@ -60,51 +117,12 @@ with open("athletics.tsv", 'r') as file:
                         continue
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     if args.overall != None:
-        print("kkl")
+        type = args.overall.split(" ")
+        n = 0
+        while n < len(type):
+            (gog(type[n]))
+            n += 1
+
+
 
