@@ -2,12 +2,12 @@ import argparse
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-country", default=None)
-parser.add_argument("-year", type=int, default=None)
-parser.add_argument("-medals", default=None)
-parser.add_argument("-total", type=int, default=None)
-parser.add_argument("-overall", default=None)
-parser.add_argument("-interactive", default=None)
+parser.add_argument("--country", required=False)
+parser.add_argument("--year", type=int, required=False)
+parser.add_argument("--medals", required=False)
+parser.add_argument("--total", type=int, required=False)
+parser.add_argument("--overall", required=False)
+parser.add_argument("--interactive", required=False)
 
 args = parser.parse_args()
 
@@ -50,7 +50,7 @@ with open("athletics.tsv", 'r') as file:
                                             print("This country doesn't have more than 10 medals")
                                             break
                                         else:
-                                            print("Gold - "+ str(gold) + " Silver - "+ str(silver) + " Bronze - "+ str(bronze))
+                                            print("Gold - " + str(gold) + "Silver - " + str(silver) + " Bronze - " + str(bronze))
                                             break
                             else:
                                 continue
