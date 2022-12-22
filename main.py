@@ -57,7 +57,6 @@ def gog(type):
                     continue
             else:
                 continue
-        print(len(data))
         n = 0
         while True:
             if max(count) != count[n]:
@@ -107,7 +106,7 @@ with open("athletics.tsv", 'r') as file:
                                             print("This country doesn't have more than 10 medals")
                                             break
                                         else:
-                                            print("Gold - " + str(gold) + "Silver - " + str(silver) + " Bronze - " + str(bronze))
+                                            print("Gold - " + str(gold) + " Silver - " + str(silver) + " Bronze - " + str(bronze))
                                             break
                             else:
                                 continue
