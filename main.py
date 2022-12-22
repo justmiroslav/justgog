@@ -5,7 +5,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--country", required=False)
 parser.add_argument("--year", type=int, required=False)
 parser.add_argument("--medals", required=False)
-parser.add_argument("-T", "--total", required=False)
+parser.add_argument("--total", required=False)#"-T",
 parser.add_argument("--overall", required=False)
 parser.add_argument("--interactive", required=False)
 
@@ -151,4 +151,6 @@ def total():
 with open("athletics.tsv", 'r') as file:
     file.readline()
     total()
+
+
 
