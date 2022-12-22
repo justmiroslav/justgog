@@ -5,14 +5,14 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--country", required=False)
 parser.add_argument("--year", type=int, required=False)
 parser.add_argument("--medals", required=False)
-parser.add_argument("--total", type=int, required=False)
+parser.add_argument("-T", "--total", required=False)
 parser.add_argument("--overall", required=False)
 parser.add_argument("--interactive", required=False)
 
 args = parser.parse_args()
 
 
-def gag(curently_year, country1):
+def gag(current_year, country1):
     counter = 0
     with open("athletics.tsv", 'r') as file:
         file.readline()
@@ -24,7 +24,7 @@ def gag(curently_year, country1):
             medal = (line_split[14])
             line = file.readline()
             if country1 == country:
-                if curently_year == year:
+                if current_year == year:
                     if medal != "NA\n":
                         counter += 1
                     else:
@@ -50,9 +50,9 @@ def gog(type):
             line = file.readline()
             if type == country:
                 if medal != "NA\n":
-                    curently_year = year
+                    current_year = year
                     data.append(year)
-                    count.append(gag(curently_year, country))
+                    count.append(gag(current_year, country))
                 else:
                     continue
             else:
@@ -124,5 +124,32 @@ with open("athletics.tsv", 'r') as file:
             (gog(type[n]))
             n += 1
 
+def total():
+    olymp_year = args.total
+    dict = {}
+    while True:
+        line = file.readline()
+        split_line = line.split("\t")
+        if not line:
+            break
+        country = split_line[6]
+        medal = split_line[14]
+        year = split_line[9]
+        if olymp_year == year:
+            if medal != "NA" and medal != "NA\n":
+                if country not in dict:
+                    dict.update({country: [0, 0, 0]})
+                if medal == "Gold\n":
+                    dict[country][0] += 1
+                if medal == "Silver\n":
+                    dict[country][1] += 1
+                if medal == "Bronze\n":
+                    dict[country][2] += 1
+    for country in dict:
+        print(f"{country} - {dict[country][0]} gold medals, {dict[country][1]} silver medals, {dict[country][2]} bronze medals")
 
+
+with open("athletics.tsv", 'r') as file:
+    file.readline()
+    total()
 
